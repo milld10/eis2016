@@ -27,8 +27,8 @@ def euklid(a, b):
 
 def generatePrivateKey(p, N, e):
     q = int(N/p)
-    print(q)
-    print(p)
+    print("q:",q)
+    print("p:",p)
     phi = (p - 1)*(q - 1)
     print("phi:",phi)
     print("e:",e)
@@ -38,26 +38,27 @@ def generatePrivateKey(p, N, e):
 def decrypt(c, e, N):
     p = factorising(N)
     d = generatePrivateKey(p, N, e)
-    print("d: ", d)
+    print("d:", d)
     counter = 0
     c_zahl = 0
     for i in c:
         c_zahl += (ord(i) - 65) * pow(26, counter)
         counter += 1
 
-    m = (pow(c_zahl,d)) % N
+    m = (pow(c_zahl,d, N))
+    #print(m)
     m_string = ""
     counter = 0
     m_rest = 0
     while 1:
-        if m <= 0:
+        if (m - m_rest) == 0:
             return m_string
-        a = ((m - m_rest) / pow(26, counter)) % 26
-        m -= m_rest
+        a = int(((m - m_rest) / pow(26, counter)) % 26)
         m_rest += (a * pow(26, counter))
-        m_string += a
+        m_string += chr(a+65)
         counter += 1
+        #print(m_string)
 
 
 message = decrypt(c, e, n)
-print(message)
+print("Message:",message)
