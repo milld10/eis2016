@@ -18,3 +18,36 @@
 # Tip:
 # Start off with collision search for smaller hashes, e.g., only the first 32 bits of the hash.
 # Expect that the collision search takes some time. Depending on your code and machine, the search can take more than an hour.
+
+
+
+import hashlib
+
+CONST_PREFIX = '1430320143050014305291430751'
+
+def SHA2mod (prefix, message):
+    colliding_message = prefix + message
+    hash_object = hashlib.sha256(colliding_message.encode('utf-8'))
+    print(hash_object.hexdigest())
+    chunkA = hash_object.hexdigest()[:8]
+    chunkB = hash_object.hexdigest()[8:16]
+    chunkC = hash_object.hexdigest()[16:24]
+    chunkD = hash_object.hexdigest()[24:32]
+    chunkE = hash_object.hexdigest()[32:40]
+    chunkF = hash_object.hexdigest()[40:48]
+    chunkG = hash_object.hexdigest()[48:56]
+    chunkH = hash_object.hexdigest()[56:64]
+    #print(chunkA, chunkB, chunkC, chunkD, chunkE, chunkF, chunkG, chunkH)
+
+    XOR_ABCD_2 = hex(int(chunkA, 16) ^ int(chunkB, 16) ^ int(chunkC, 16) ^ int(chunkD, 16))
+    XOR_EFGH_1 = hex(int(chunkE, 16) ^ int(chunkF, 16) ^ int(chunkG, 16) ^ int(chunkH, 16))
+    XOR = XOR_EFGH_1+XOR_ABCD_2
+    #print(XOR)
+
+def generateMessage ():
+
+
+
+
+SHA2mod(CONST_PREFIX, random_message)
+
