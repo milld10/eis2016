@@ -5,7 +5,7 @@ n = 1180592782282757817137
 c = "MMCTNLAZNXEFUEN"
 
 def pseudorand(x, n):
-    return (pow(x, 2)+1) % n
+    return ((pow(x, 2)+1) % n)
 
 def factorising(n):
     x = 2
@@ -19,10 +19,10 @@ def factorising(n):
 
 def euklid(a, b):
     if a == 0:
-        return (b, 0, 1)
+        return b, 0, 1
     else:
         g, x, y = euklid((b % a), a)
-    return (g, y - (b // a) * x, x)
+    return g, (y - (b // a) * x), x
 
 
 def generatePrivateKey(p, N, e):
@@ -33,19 +33,31 @@ def generatePrivateKey(p, N, e):
     print("phi:",phi)
     print("e:",e)
     ggt, d, k = euklid(e, phi)
-    print("d: ", d)
     return d
 
 def decrypt(c, e, N):
     p = factorising(N)
     d = generatePrivateKey(p, N, e)
-    print(d)
-    m = ""
+    print("d: ", d)
+    counter = 0
+    c_zahl = 0
     for i in c:
-        a = ord(i) - 65
-        b = ((pow(a,d))% N) + 65
-        m = m + chr(b)
-    return m
+        c_zahl += (ord(i) - 65) * pow(26, counter)
+        counter += 1
+
+    m = (pow(c_zahl,d)) % N
+    m_string = ""
+    counter = 0
+    m_rest = 0
+    while 1:
+        if m <= 0:
+            return m_string
+        a = ((m - m_rest) / pow(26, counter)) % 26
+        m -= m_rest
+        m_rest += (a * pow(26, counter))
+        m_string += a
+        counter += 1
+
 
 message = decrypt(c, e, n)
 print(message)
