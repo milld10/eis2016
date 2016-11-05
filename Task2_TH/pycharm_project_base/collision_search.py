@@ -34,9 +34,6 @@ def searchCollision():
     while(hareVal != tortoiseVal):
         tortoiseVal = SHA2mod(CONST_PREFIX, tortoiseVal)
         hareVal = SHA2mod(CONST_PREFIX, SHA2mod(CONST_PREFIX, hareVal))
-        print("tortoiseVal: " + tortoiseVal)
-        print("hareVal: " + hareVal)
-        print("")
 
     print("collision detected: now find where")
 
