@@ -1,10 +1,7 @@
 import hashlib
-import time
 
 CONST_PREFIX = '1430320143050014305291430751'
-CONST_N = 1<<1000000
 CONST_START_NUMBER = '2ac5'
-CONST_LIST_SIZE = 100
 
 def SHA2mod(prefix, message):
     colliding_message = prefix + message
