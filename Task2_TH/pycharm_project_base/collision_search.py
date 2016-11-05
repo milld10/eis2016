@@ -26,18 +26,15 @@ def SHA2mod(prefix, message):
     #print("%x" % XOR_ABCD_2)
     #print("%x" % XOR_EFGH_1)
     #print("%x" % XOR)
+
     return "%x" % XOR
     #return "%x" % XOR_ABCD_2
 
 def searchCollision():
     tortoiseVal = SHA2mod(CONST_PREFIX, CONST_START_NUMBER)
     hareVal = SHA2mod(CONST_PREFIX, SHA2mod(CONST_PREFIX, CONST_START_NUMBER))
-    oldTortoiseVal = ''
-    oldHareVal = ''
 
     while(hareVal != tortoiseVal):
-        oldTortoiseVal = tortoiseVal
-        oldHareVal = hareVal
         tortoiseVal = SHA2mod(CONST_PREFIX, tortoiseVal)
         hareVal = SHA2mod(CONST_PREFIX, SHA2mod(CONST_PREFIX, hareVal))
 
@@ -54,6 +51,7 @@ def searchCollision():
     hareValues[hareVal] = oldHareVal
 
     tortoiseVal = CONST_START_NUMBER
+    oldTortoiseVal = ''
 
     while (tortoiseVal not in hareValues):
         oldTortoiseVal = tortoiseVal
