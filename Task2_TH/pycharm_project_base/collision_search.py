@@ -30,17 +30,17 @@ def SHA2mod(prefix, message):
 
 def searchCollision():
     powerVal = 1
-    lamVal = 1
+    lambdaVal = 1
     tortoiseVal = CONST_START_NUMBER
     hareVal = SHA2mod(CONST_PREFIX, CONST_START_NUMBER)
 
     while(hareVal != tortoiseVal):
-        if powerVal == lamVal:
+        if(powerVal == lambdaVal):
             tortoiseVal = hareVal
             powerVal *= 2
-            lamVal = 0
+            lambdaVal = 0
         hareVal = SHA2mod(CONST_PREFIX, hareVal)
-        lamVal += 1
+        lambdaVal += 1
 
     print('End of first while')
 
@@ -49,12 +49,12 @@ def searchCollision():
     hareVal = CONST_START_NUMBER
     hareOldVal = CONST_START_NUMBER
 
-    for i in range(0, lamVal):
+    for i in range(0, lambdaVal):
         hareVal =  SHA2mod(CONST_PREFIX, hareVal)
 
     print('End of for')
 
-    while tortoiseVal != hareVal:
+    while(tortoiseVal != hareVal):
         tortoiseOldVal = tortoiseVal
         tortoiseVal =  SHA2mod(CONST_PREFIX, tortoiseVal)
         hareOldVal = hareVal
