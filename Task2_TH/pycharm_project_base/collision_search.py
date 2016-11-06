@@ -1,4 +1,5 @@
 import hashlib
+import time
 
 CONST_PREFIX = '1430320143050014305291430751'
 CONST_START_NUMBER = '2ac5'
@@ -28,41 +29,46 @@ def SHA2mod(prefix, message):
     #return "%x" % XOR_ABCD_2
 
 def searchCollision():
-    tortoiseVal = SHA2mod(CONST_PREFIX, CONST_START_NUMBER)
-    hareVal = SHA2mod(CONST_PREFIX, SHA2mod(CONST_PREFIX, CONST_START_NUMBER))
+    powerVal = 1
+    lamVal = 1
+    tortoiseVal = CONST_START_NUMBER
+    hareVal = SHA2mod(CONST_PREFIX, CONST_START_NUMBER)
 
     while(hareVal != tortoiseVal):
-        tortoiseVal = SHA2mod(CONST_PREFIX, tortoiseVal)
-        hareVal = SHA2mod(CONST_PREFIX, SHA2mod(CONST_PREFIX, hareVal))
-
-    print("collision detected: now find where")
-
-    hareValBegin = hareVal
-    hareValues = dict()
-    oldHareVal = hareValBegin
-    hareVal = SHA2mod(CONST_PREFIX, hareValBegin)
-    while (hareVal != hareValBegin):
-        hareValues[hareVal] = oldHareVal
-        oldHareVal = hareVal
+        if powerVal == lamVal:
+            tortoiseVal = hareVal
+            powerVal *= 2
+            lamVal = 0
         hareVal = SHA2mod(CONST_PREFIX, hareVal)
-    hareValues[hareVal] = oldHareVal
+        lamVal += 1
+
+    print('End of first while')
 
     tortoiseVal = CONST_START_NUMBER
-    oldTortoiseVal = ''
+    tortoiseOldVal = CONST_START_NUMBER
+    hareVal = CONST_START_NUMBER
+    hareOldVal = CONST_START_NUMBER
 
-    while (tortoiseVal not in hareValues):
-        oldTortoiseVal = tortoiseVal
-        tortoiseVal = SHA2mod(CONST_PREFIX, tortoiseVal)
+    for i in range(0, lamVal):
+        hareVal =  SHA2mod(CONST_PREFIX, hareVal)
 
-    oldHareVal = hareValues[tortoiseVal]
+    print('End of for')
+
+    while tortoiseVal != hareVal:
+        tortoiseOldVal = tortoiseVal
+        tortoiseVal =  SHA2mod(CONST_PREFIX, tortoiseVal)
+        hareOldVal = hareVal
+        hareVal = SHA2mod(CONST_PREFIX, hareVal)
 
     print('Collision was detected!!!')
     print('Collision with hash value ' + tortoiseVal)
-    print('Normal value tortoise: ' + CONST_PREFIX + oldTortoiseVal)
-    print('Normal value hare:     ' + CONST_PREFIX + oldHareVal)
-    print('Control tortoise: ' + SHA2mod(CONST_PREFIX, oldTortoiseVal))
-    print('Control hare:     ' + SHA2mod(CONST_PREFIX, oldHareVal))
+    print('Normal value tortoise: ' + CONST_PREFIX + tortoiseOldVal)
+    print('Normal value hare:     ' + CONST_PREFIX + hareOldVal)
+    print('Control tortoise: ' + SHA2mod(CONST_PREFIX, tortoiseOldVal))
+    print('Control hare:     ' + SHA2mod(CONST_PREFIX, hareOldVal))
 
+startTime = time.time()
 searchCollision()
+print("Runtime in seconds: " + str(time.time() - startTime))
 #print('Control tortoise: ' + SHA2mod(CONST_PREFIX, 'f14e6ba5'))
 #print('Control hare:     ' + SHA2mod(CONST_PREFIX, '5d1b5e27'))
