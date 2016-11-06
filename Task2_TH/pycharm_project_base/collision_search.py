@@ -34,6 +34,12 @@ def searchCollision():
     tortoiseVal = CONST_START_NUMBER
     hareVal = SHA2mod(CONST_PREFIX, CONST_START_NUMBER)
 
+    #You search for the first collision and when that happens you also get lambda=length of circle
+    #you get lampda because within the if the tortoise value is assigned the value of the hare
+    #lampda is set to 0
+    #each run that the hare does, the lampda is increased by 1
+    #when there occurs a collision we know the length of the circle = lambda
+    #(because tortoise value was not changed since then - lambda was increased by 1 each turn of hare)
     while(hareVal != tortoiseVal):
         if(powerVal == lambdaVal):
             tortoiseVal = hareVal
@@ -49,11 +55,18 @@ def searchCollision():
     hareVal = CONST_START_NUMBER
     hareOldVal = CONST_START_NUMBER
 
+    #We know the lenght of the circle=lambda
+    #So we let the hare run until it reaches the lenght of the circle
     for i in range(0, lambdaVal):
         hareVal =  SHA2mod(CONST_PREFIX, hareVal)
 
     print('End of for')
 
+    #Now we let the tortoise and hare run until we have the collision
+    #(We know the lenght of the circle but not the tail mu - calculating the mu can be done here
+    # but it is not needed here)
+    #Collision will occur because they are the lenght of the circle apart from each other
+    #Just a matter of time until the collusion occurs and then you also know the tail
     while(tortoiseVal != hareVal):
         tortoiseOldVal = tortoiseVal
         tortoiseVal =  SHA2mod(CONST_PREFIX, tortoiseVal)
