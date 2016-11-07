@@ -1,0 +1,4 @@
+https://core.telegram.org/articles/DH_Hash_Collision - eher nicht so gut
+https://online.tugraz.at/tug_online/voe_main2.getvolltext?pCurrPk=55825
+https://www.cs.colorado.edu/~srirams/courses/csci2824-spr14/pollardsRho.html
+https://en.wikipedia.org/wiki/Cycle_detection
