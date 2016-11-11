@@ -83,5 +83,5 @@ def searchCollision():
 startTime = time.time()
 searchCollision()
 print("Runtime in seconds: " + str(time.time() - startTime))
-#print('Control tortoise: ' + SHA2mod(CONST_PREFIX, 'f14e6ba5'))
-#print('Control hare:     ' + SHA2mod(CONST_PREFIX, '5d1b5e27'))
+#print('Control tortoise: ' + SHA2mod(CONST_PREFIX, '2f1a142ddfa25079'))
+#print('Control hare:     ' + SHA2mod(CONST_PREFIX, 'd71c3c584b5bf4d3'))

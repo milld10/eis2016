@@ -1,0 +1,11 @@
+End of first while
+End of for
+Collision was detected!!!
+Collision with hash value df62fa19cc3ac958
+Normal value tortoise: 14303201430500143052914307512f1a142ddfa25079
+Normal value hare:     1430320143050014305291430751d71c3c584b5bf4d3
+Control tortoise: df62fa19cc3ac958
+Control hare:     df62fa19cc3ac958
+Runtime in seconds: 100168.51251
+python collision_search.py  81682,62s user 13,84s system 81% cpu 27:49:28,63 total
+
