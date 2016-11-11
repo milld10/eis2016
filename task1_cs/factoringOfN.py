@@ -41,15 +41,21 @@ def decrypt(c, e, N):
     print("d:", d)
     counter = 0
     c_zahl = 0
+
+    #encode
     for i in c:
         c_zahl += (ord(i) - 65) * pow(26, counter)
         counter += 1
 
+    #decrypt
     m = (pow(c_zahl,d, N))
+
     #print(m)
     m_string = ""
     counter = 0
     m_rest = 0
+
+    #decode
     while 1:
         if (m - m_rest) == 0:
             return m_string
@@ -57,7 +63,7 @@ def decrypt(c, e, N):
         m_rest += (a * pow(26, counter))
         m_string += chr(a+65)
         counter += 1
-        #print(m_string)
+        print(m_string)
 
 
 message = decrypt(c, e, n)
