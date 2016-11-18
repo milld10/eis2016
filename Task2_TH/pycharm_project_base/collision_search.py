@@ -25,8 +25,8 @@ def SHA2mod(prefix, message):
     #print("%x" % XOR_EFGH_1)
     #print("%x" % XOR)
 
-    #return "%x" % XOR
-    return "%x" % XOR_ABCD_2
+    return "%x" % XOR
+    #return "%x" % XOR_ABCD_2
 
 def searchCollision():
     powerVal = 1
