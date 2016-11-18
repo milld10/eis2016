@@ -1,4 +1,5 @@
 import math
+import time
 
 e = 867512337310254731119
 n = 1180592782282757817137
@@ -60,6 +61,7 @@ def decrypt(c, e, N):
 
     return m_string
 
-
+startTime = time.time()
 message = decrypt(c, e, n)
 print("Message:",message)
+print("Runtime in seconds: " + str(time.time() - startTime))
