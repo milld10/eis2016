@@ -28,6 +28,8 @@ def SHA2mod(prefix, message):
     return "%x" % XOR
     #return "%x" % XOR_ABCD_2
 
+#Brent's algorithm
+#https://en.wikipedia.org/wiki/Cycle_detection
 def searchCollision():
     powerVal = 1
     lambdaVal = 1

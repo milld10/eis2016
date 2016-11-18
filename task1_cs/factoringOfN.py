@@ -24,11 +24,11 @@ def factorising(n):
 
 #Using the extendend euclid algorithm
 #https://en.wikibooks.org/wiki/Algorithm_Implementation/Mathematics/Extended_Euclidean_algorithm
-def euklid(a, b):
+def extEuclid(a, b):
     if a == 0:
         return b, 0, 1
     else:
-        g, x, y = euklid((b % a), a)
+        g, x, y = extEuclid((b % a), a)
     return g, (y - (b // a) * x), x
 
 
@@ -41,7 +41,7 @@ def generatePrivateKey(p, N, e):
     phi = (p - 1)*(q - 1)
     print("phi:",phi)
     print("e:",e)
-    ggt, d, k = euklid(e, phi)
+    ggt, d, k = extEuclid(e, phi)
     return d
 
 def decrypt(c, e, N):
@@ -56,7 +56,7 @@ def decrypt(c, e, N):
         c_zahl += (ord(i) - 65) * pow(26, counter)
         counter += 1
 
-    #decrypt
+    #decrypt - RSA algorithm
     m = pow(c_zahl,d, N)
 
     m_string = ""
