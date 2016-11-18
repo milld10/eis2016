@@ -5,6 +5,9 @@ e = 867512337310254731119
 n = 1180592782282757817137
 c = "MMCTNLAZNXEFUEN"
 
+
+#Using Pollard's Rho algorithm for factorizing
+#https://www.cs.colorado.edu/~srirams/courses/csci2824-spr14/pollardsRho.html
 def pseudorand(x, n):
     return ((pow(x, 2)+1) % n)
 
@@ -18,6 +21,9 @@ def factorising(n):
         d = math.gcd(abs(x-y), n)
     return d
 
+
+#Using the extendend euclid algorithm
+#https://en.wikibooks.org/wiki/Algorithm_Implementation/Mathematics/Extended_Euclidean_algorithm
 def euklid(a, b):
     if a == 0:
         return b, 0, 1
@@ -26,6 +32,8 @@ def euklid(a, b):
     return g, (y - (b // a) * x), x
 
 
+#Using RSA algorithm for generating private key
+#http://doctrina.org/How-RSA-Works-With-Examples.html
 def generatePrivateKey(p, N, e):
     q = int(N/p)
     print("q:",q)
@@ -51,7 +59,6 @@ def decrypt(c, e, N):
     #decrypt
     m = pow(c_zahl,d, N)
 
-    #print(m)
     m_string = ""
 
     #decode
